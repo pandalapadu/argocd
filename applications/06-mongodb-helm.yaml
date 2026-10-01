@@ -2,26 +2,24 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 
 metadata:
-  name: aws-load-balancer-controller
+  name: mongodb-helm
   namespace: argocd
 
 spec:
   project: default
 
   source:
-    chart: aws-load-balancer-controller
-    repoURL: https://aws.github.io/eks-charts
-    targetRevision: 3.5.0 # chart-version
+    chart: mongodb-helm
+    repoURL: 'https://github.com'
+    path: '7-k8s/07-helm-roboshop/01-mongodb'
+    targetRevision: main
     helm: 
-      values: |
-        clusterName: roboshop-dev
-        serviceAccount:
-          create: false
-          name: aws-load-balancer-controller
-        region: us-east-1
+      valuesFiles:
+        - values.yaml
+       # - values-dev.yaml
   destination:   # Destination configuration pointing to the target cluster and namespace
     server: https://kubernetes.default.svc
-    namespace: kube-system
+    namespace: roboshop-dev
 
   syncPolicy:
     automated:
