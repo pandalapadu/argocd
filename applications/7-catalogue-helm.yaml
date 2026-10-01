@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+
+metadata:
+  name: catalogue-helm
+  namespace: argocd
+
+spec:
+  project: default
+
+  source:
+    # FIXED: Point to the exact Git repository containing your source code
+    repoURL: 'https://github.com'
+    
+    # FIXED: Specify the path relative to the root of the Git repo where the chart lives
+    path: '7-k8s/07-helm-roboshop/02-catalogue'
+    
+    # FIXED: Track the target Git branch instead of a Helm chart version
+    targetRevision: main
+    
+    helm: 
+      valuesFiles:
+        - values.yaml
+  
+  destination:   
+    server: https://kubernetes.default.svc
+    namespace: roboshop-dev
+
+  syncPolicy:
+    automated:
+      prune: true     
+      selfHeal: true   
