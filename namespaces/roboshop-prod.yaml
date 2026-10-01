@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: roboshop-prod
+  labels:
+    environment: prod
+    project: roboshop
+    purpose: poc
