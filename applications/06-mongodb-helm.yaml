@@ -9,19 +9,24 @@ spec:
   project: default
 
   source:
-    chart: mongodb-helm
+    # FIXED: Point to the exact Git repository containing your source code
     repoURL: 'https://github.com'
+    
+    # FIXED: Specify the path relative to the root of the Git repo where the chart lives
     path: '7-k8s/07-helm-roboshop/01-mongodb'
+    
+    # FIXED: Track the target Git branch instead of a Helm chart version
     targetRevision: main
+    
     helm: 
       valuesFiles:
         - values.yaml
-       # - values-dev.yaml
-  destination:   # Destination configuration pointing to the target cluster and namespace
+  
+  destination:   
     server: https://kubernetes.default.svc
     namespace: roboshop-dev
 
   syncPolicy:
     automated:
-      prune: true     # This will delete resources that are no longer defined in the Git repository.
-      selfHeal: true   # This will automatically apply changes made to the resources in the Git repository.
+      prune: true     
+      selfHeal: true   
