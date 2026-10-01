@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+
+metadata:
+  name: aws-load-balancer-controller
+  namespace: argocd
+
+spec:
+  project: default
+
+  source:
+    chart: aws-load-balancer-controller
+    repoURL: https://aws.github.io/eks-charts
+    targetRevision: 3.5.0 # chart-version
+    helm: 
+      values: |
+        clusterName: roboshop-dev
+        serviceAccount:
+          create: false
+          name: aws-load-balancer-controller
+        region: us-east-1
+  destination:   # Destination configuration pointing to the target cluster and namespace
+    server: https://kubernetes.default.svc
+    namespace: default
+
+  syncPolicy:
+    automated:
+      prune: true     # This will delete resources that are no longer defined in the Git repository.
+      selfHeal: true   # This will automatically apply changes made to the resources in the Git repository.
