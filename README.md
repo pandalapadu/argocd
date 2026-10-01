@@ -6,3 +6,5 @@ You can configure it in Argo CD's argocd-cm ConfigMap: kubectl get cm argocd-cm 
 we will chnage under :
     data:
         timeout.reconciliation: 180s
+after update restart the : 
+    kubectl rollout restart statefulset argocd-application-controller -n argocd
