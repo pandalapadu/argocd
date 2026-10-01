@@ -1,8 +1,10 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
+
 metadata:
   name: namespaces
   namespace: argocd
+
 spec:
   project: default
 
@@ -14,8 +16,8 @@ spec:
   destination:
     server: https://kubernetes.default.svc
     namespace: default
-  
+
   syncPolicy:
     automated:
-      prune: true  # Automatically delete resources that are no longer defined in the Git repository.
-      selfHeal: true
+      prune: true     # This will delete resources that are no longer defined in the Git repository.
+      selfHeal: true   # This will automatically apply changes made to the resources in the Git repository.
