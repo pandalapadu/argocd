@@ -21,7 +21,7 @@ spec:
         region: us-east-1
   destination:   # Destination configuration pointing to the target cluster and namespace
     server: https://kubernetes.default.svc
-    namespace: default
+    namespace: kube-system
 
   syncPolicy:
     automated:
