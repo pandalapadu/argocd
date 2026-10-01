@@ -7,18 +7,10 @@ spec:
   project: default
 
   source:
-    repoURL: https://github.com/pandalapadu/my-AWS-DevOps-Project.git
+    repoURL: https://github.com/pandalapadu/argocd.git
     targetRevision: main
-    path: k8s
+    path: namespaces
 
   destination:
     server: https://kubernetes.default.svc
-    namespace: roboshop
-
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-
-    syncOptions:
-      - CreateNamespace=true
+    namespace: default
