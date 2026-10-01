@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: roboshop-uat
+  labels:
+    environment: uat
+    project: roboshop
+    purpose: poc
